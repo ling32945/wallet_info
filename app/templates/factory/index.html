@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+<div class="page-header">
+    <h1>工厂 -  列表</h1>
+</div>
+<div class="panel panel-primary">
+    <div class="panel-heading">工厂列表</div>
+    <div class="panel-body">
+        <p>工厂列表列出了所有银包的工厂</p>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>工厂编号</th>
+                <th>工厂名称</th>
+                <th>描述</th>
+                <th width=180px;></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for factory in data %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ factory.no }}</td>
+                <td>{{ factory.name }}</td>
+                <td>{{ factory.description }}</td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="...">
+                        <a class="btn btn-default" href="{{ url_for('factory.detail', token=factory.id) }}">查看</a>
+                        <a class="btn btn-default" href="{{ url_for('factory.update', token=factory.id) }}">修改</a>
+                        <a class="btn btn-default" href="{{ url_for('factory.delete', token=factory.id) }}">删除</a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="panel-footer">
+        <div class="btn-group" role="group" aria-label="...">
+            <a class="btn btn-success" href="{{ url_for('factory.add') }}">添加工厂</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

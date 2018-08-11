@@ -1,0 +1,7 @@
+Flask
+Flask-Migrate
+Flask-Script
+Request
+Flask-MySQLdb
+uwsgi
+Flask-Bootstrap

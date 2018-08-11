@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Diamond - Category{% endblock %}
+
+{% block app_content %}
+<div class="page-header">
+    <h1>产品类别 -  列表</h1>
+</div>
+<div class="panel panel-primary">
+    <div class="panel-heading">产品类别列表</div>
+    <div class="panel-body">
+        <p>产品类别列表列出了所有银包的种类</p>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>银包类别</th>
+                <th>描述</th>
+                <th width=180px;></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for category in data %}
+            <tr>
+                <!-- <td>{{ category.id }}</td> -->
+                <td>{{ loop.index }}</td>
+                <td>{{ category.category }}</td>
+                <td>{{ category.description }}</td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="...">
+                        <a class="btn btn-default" href="{{ url_for('category.detail', token=category.id) }}">查看</a>
+                        <a class="btn btn-default" href="{{ url_for('category.update', token=category.id) }}">修改</a>
+                        <a class="btn btn-default" href="{{ url_for('category.delete', token=category.id) }}">删除</a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="panel-footer">
+        <div class="btn-group" role="group" aria-label="...">
+            <a class="btn btn-success" href="{{ url_for('category.category_add') }}">添加产品类别</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

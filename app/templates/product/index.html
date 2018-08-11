@@ -1,0 +1,186 @@
+{% extends "base.html" %}
+{% block styles %}
+{{ super() }}
+<link rel="stylesheet" href="{{url_for('static', filename='css/fileinput/fileinput.css')}}">
+
+<style type="text/css">
+.file-preview {
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    padding: 0;
+    width: 100%;
+    margin-bottom: 5px;
+}
+.krajee-default.file-preview-frame {
+    margin: 0px;
+    border: 1px solid #ddd;
+    box-shadow: 1px 1px 5px 0 #a2958a;
+    padding: 6px;
+    float: left;
+    text-align: center;
+}
+</style>
+
+{% endblock styles %}
+
+{% block app_content %}
+<div class="page-header">
+    <h1>产品 -  列表</h1>
+</div>
+<div class="panel panel-primary">
+    <div class="panel-heading">产品列表</div>
+    <div class="panel-body">
+        <p>产品列表列出了所有银包的产品</p>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th width="100px">图片</th>
+                <th width="10%">#</th>
+                <th width="10%">款号</th>
+                <th width="10%">货号</th>
+                <th width="10%">条形码</th>
+                <th width="10%">品牌</th>
+                <th width="15%">产品简称</th>
+                <th width="15%">产品类别</th>
+                <!--
+                <th>所属性别</th>
+                <th>颜色</th>
+                <th>主材质</th>
+                <th>副材质</th>
+                <th>内衬</th>
+                <th>外部结构</th>
+                <th>内部结构</th>
+                <th>打开方式</th>
+                <th>长cm</th>
+                <th>宽cm</th>
+                <th>厚cm</th>
+                <th>长*宽*厚cm</th>
+                <th>重量g</th>
+                <th>供应商</th>
+                <th>出厂价</th>
+                <th>成本价</th>
+                <th>吊牌价</th>
+                <th>零售价</th>
+                <th>原货号</th>
+                <th>特征</th>
+                <th>备注</th>
+                -->
+                <th width="180px"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in data %}
+            <tr>
+                <td>
+                    <div class="file-loading">
+                        <input id="input-pd-{{product.id}}" name="input-pd"  type="file">
+                    </div>
+                </td>
+                <td>{{ loop.index }}</td>
+                <td>{{ product.style_no }}</td>
+                <td>{{ product.item_no}}</td>
+                <td>{{ product.barcode }}</td>
+                <td>{{ product.brand }}</td>
+                <td>{{ product.product_abbreviation }}</td>
+                <td>{{ product.category }}</td>
+                <!--
+                <td>{{ product.gender }}</td>
+                <td>{{ product.color }}</td>
+                <td>{{ product.main_material }}</td>
+                <td>{{ product.vice_material }}</td>
+                <td>{{ product.interior_material }}</td>
+                <td>{{ product.exterior_structure }}</td>
+                <td>{{ product.interior_structure }}</td>
+                <td>{{ product.open_mode }}</td>
+                <td>{{ product.length }}</td>
+                <td>{{ product.width }}</td>
+                <td>{{ product.height }}</td>
+                <td>{{data.length}}*{{data.width}}*{{data.height}}</td>
+                <td>{{ product.weight }}</td>
+                <td>{{ product.supplier }}</td>
+                <td>{{ product.factory_price }}</td>
+                <td>{{ product.cost_price }}</td>
+                <td>{{ product.tag_price }}</td>
+                <td>{{ product.retail_price }}</td>
+                <td>{{ product.original_item_no }}</td>
+                <td>{{ product.feature }}</td>
+                <td>{{ product.comment }}</td>
+                -->
+                <td>
+                    <div class="btn-group" role="group" aria-label="...">
+                        <a class="btn btn-default" href="{{ url_for('product.detail', token = product.id) }}">查看</a>
+                        <a class="btn btn-default" href="{#{ url_for('product.update', token=product.id) }#}">修改</a>
+                        <a class="btn btn-default" href="{#{ url_for('product.delete', token=product.id) }#}">删除</a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="panel-footer">
+        <div class="btn-group" role="group" aria-label="...">
+            <a class="btn btn-success" href="{{ url_for('product.add') }}">添加产品</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+    {{ super() }}
+    <!--
+    <script src="{{url_for('static', filename='js/fileinput/plugins/piexif.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/fileinput/plugins/sortable.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/fileinput/plugins/purify.min.js')}}"></script>
+    -->
+    <script src="{{url_for('static', filename='js/fileinput/fileinput.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/fileinput/locales/zh.js')}}"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.combobox').combobox();
+        });
+
+    {% for product in data %}
+        $(document).on('ready', function() {
+            $("#input-pd-{{product.id}}").fileinput({
+                browseClass: "btn btn-primary btn-block",
+                language: "zh",
+                required: true,
+                uploadAsync: false,
+                dropZoneEnabled: false,
+                overwriteInitial: true,
+                showPreview: true,
+                showRemove: false,
+                showUpload: false,
+                showCancel: false,
+                showClose: false,
+                showBrowse: false,
+                showCaption: false,
+                initialPreview: [
+                    "{{url_for('static', filename='wallet/'+product["image"])}}"
+                ],
+                initialPreviewConfig: [
+                    {
+                        caption: "{{data["image"]}}",
+                        size: 827000,
+                        width: "180px",
+                        //url: "/file-upload-batch/2",
+                        //key: 1,
+                        //extra: {id: 1}
+                    }
+                ],
+                initialPreviewShowDelete: false,
+                initialPreviewAsData: true, // identify if you are sending preview data only and not the raw markup
+                initialPreviewFileType: 'image', 
+                //elErrorContainer: '#kartik-file-errors',
+                allowedFileExtensions: ["jpg", "jpeg", "png", "gif"]
+            });
+        });
+
+    {% endfor %}
+    </script>
+{%- endblock scripts %}
+

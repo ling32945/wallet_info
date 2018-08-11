@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Diamond{% endblock %}
+
+{% block app_content %}
+<div class="page-header">
+    <h1>销售渠道 -  列表</h1>
+</div>
+<div class="panel panel-primary">
+    <div class="panel-heading">销售渠道列表</div>
+    <div class="panel-body">
+        <p>销售渠道列表列出了所有银包的销售渠道</p>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>销售渠道</th>
+                <th>描述</th>
+                <th width=180px;></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for channel in data %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ channel.name }}</td>
+                <td>{{ channel.description }}</td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="...">
+                        <a class="btn btn-default" href="{{ url_for('saleChannel.detail', token=channel.id) }}">查看</a>
+                        <a class="btn btn-default" href="{{ url_for('saleChannel.update', token=channel.id) }}">修改</a>
+                        <a class="btn btn-default" href="{{ url_for('saleChannel.delete', token=channel.id) }}">删除</a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="panel-footer">
+        <div class="btn-group" role="group" aria-label="...">
+            <a class="btn btn-success" href="{{ url_for('saleChannel.add') }}">添加销售渠道</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

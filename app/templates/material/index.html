@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+<div class="page-header">
+    <h1>材质 -  列表</h1>
+</div>
+<div class="panel panel-primary">
+    <div class="panel-heading">材质列表</div>
+    <div class="panel-body">
+        <p>材质列表列出了所有银包的材质</p>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>材质</th>
+                <th>描述</th>
+                <th width=180px;></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for material in data %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ material.material }}</td>
+                <td>{{ material.description }}</td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="...">
+                        <a class="btn btn-default" href="{{ url_for('material.detail', token=material.id) }}">查看</a>
+                        <a class="btn btn-default" href="{{ url_for('material.update', token=material.id) }}">修改</a>
+                        <a class="btn btn-default" href="{{ url_for('material.delete', token=material.id) }}">删除</a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="panel-footer">
+        <div class="btn-group" role="group" aria-label="...">
+            <a class="btn btn-success" href="{{ url_for('material.add') }}">添加材质</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

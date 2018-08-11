@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+<div class="page-header">
+    <h1>供应商 -  修改</h1>
+</div>
+<div class="panel panel-primary">
+    <div class="panel-heading">修改供应商</div>
+    <div class="panel-body">
+        <form classaction="{{ url_for('supplier.update', token=data.id) }}" method="post">
+            <span class="input-group-addon">供应商</span>
+            <input type="text" class="form-control" placeholder="供应商（必填）" name="supplier"  value="{{ data.supplier }}"/>
+            <input type="text" class="form-control" placeholder="描述" name="supplier_des"  value="{{ data.description }}"/>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+    </div>
+    <div class="panel-footer">
+        <div class="btn-group" role="group" aria-label="...">
+            <a class="btn btn-success" href="{{ url_for('supplier.index') }}">供应商列表</a>
+            <a class="btn btn-success" href="{{ url_for('supplier.detail', token=data.id) }}">供应商详情</a>
+            <a class="btn btn-success" href="{{ url_for('supplier.update', token=data.id) }}">删除供应商</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

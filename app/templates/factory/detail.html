@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+<div class="page-header">
+    <h1>工厂 -  详情</h1>
+</div>
+<div class="panel panel-primary">
+    <div class="panel-heading">工厂详情</div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-2">工厂编号：</div>
+            <div class="col-md-4">{{ data.no }}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">工厂名称：</div>
+            <div class="col-md-4">{{ data.name }}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">描述：</div>
+            <div class="col-md-4">{{ data.description }}</div>
+        </div>
+    </div>
+    <div class="panel-footer">
+        <div class="btn-group" role="group" aria-label="...">
+            <a class="btn btn-success" href="{{ url_for('factory.index') }}">工厂列表</a>
+            <a class="btn btn-success" href="{{ url_for('factory.add') }}">添加工厂</a>
+            <a class="btn btn-success" href="{{ url_for('factory.update', token=data.id) }}">修改工厂</a>
+            <a class="btn btn-success" href="{{ url_for('factory.delete', token=data.id) }}">删除工厂</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

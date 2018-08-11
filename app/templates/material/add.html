@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+<div class="page-header">
+    <h1>材质 -  添加</h1>
+</div>
+<div class="panel panel-primary">
+    <div class="panel-heading">添加新的材质</div>
+    <div class="panel-body">
+        <form classaction="{{ url_for('material.add') }}" method="post">
+            <span class="input-group-addon">材质</span>
+            <input type="text" class="form-control" required="required" placeholder="材质（必填）" name="material" />
+            <input type="text" class="form-control" placeholder="描述" name="material_des" />
+            <button type="submit" class="btn btn-primary" style="margin: 0px auto;display: table;">添加材质</button>
+        </form>
+    </div>
+    <div class="panel-footer">
+        <div class="btn-group" role="group" aria-label="...">
+            <a class="btn btn-success" href="{{ url_for('material.index') }}">材质列表</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

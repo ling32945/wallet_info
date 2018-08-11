@@ -1,0 +1,285 @@
+{% extends "base.html" %}
+{% block styles %}
+{{ super() }}
+<link rel="stylesheet" href="{{url_for('static', filename='css/fileinput/fileinput.css')}}">
+{% endblock styles %}
+
+{% block app_content %}
+<div class="page-header">
+    <h1>产品 -  添加</h1>
+</div>
+<div class="panel panel-primary">
+    <div class="panel-heading">添加新产品</div>
+    <div class="panel-body">
+        <!--<div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
+            <div class="panel panel-info">
+            <div class="panel-heading">
+            <h3 class="panel-title">Sheena Shrestha</h3>
+            </div>
+            <div class="panel-body">
+        -->
+        <div class="row">
+            <form classaction="{{ url_for('factory.add') }}" method="post" enctype="multipart/form-data">
+                <div class="col-md-4 col-lg-4 " align="center">
+                    <div class="file-loading">
+                        <input id="input-pd" name="input-pd"  type="file" required="required">
+                    </div>
+                    <!--<img alt="银包图片" src="{{url_for('static', filename='wallet/'+data["image"])}}" class="img-circle img-responsive">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        Launch Modal
+                        </button>
+                    -->                 
+                    <!-- Modal -->
+                    <!--
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <div class="modal-body">
+                        <div class="file-loading">
+                        <input id="input-b9" name="input-b9[]" multiple type="file">
+                        </div>
+                        <div id="kartik-file-errors"></div>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" title="Your custom upload logic">Save</button>
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+                    -->
+                </div>
+                <div class=" col-md-8 col-lg-8 "> 
+                    <table class="table table-user-information">
+                        <tbody>
+                            <tr>
+                                <td><span>款号</span></td>
+                                <td><input type="text" class="form-control" required="required" placeholder="银包款号（必填）" name="style_no" /></td>
+                            </tr>
+                            <tr>
+                                <td><span>货号</span></td>
+                                <td><input type="text" class="form-control" required="required" placeholder="银包货号（必填）" name="item_no" /></td>
+                            </tr>
+                            <tr>
+                                <td><span>条形码</span></td>
+                                <td><input type="text" class="form-control" required="required" placeholder="条形码（必填）" name="barcode" /></td>
+                            </tr>
+                            <tr>
+                                <td><span>品牌</span></td>
+                                <td><input type="text" class="form-control" required="required" placeholder="品牌（必填）" name="brand" /></td>
+                            </tr>
+                            <tr>
+                                <td><span>产品简称</span></td>
+                                <td><input type="text" class="form-control" required="required" placeholder="产品简称（必填）" name="product_abbreviation" /></td>
+                            </tr>
+                            <tr>
+                                <td><span>产品类别</span></td>
+                                <td>
+                                    <select required="required" class="form-control" name="category">
+                                        <option value="" selected="selected">选择银包类别</option>
+                                        {% for category in data["category"] %}
+                                        <option value="{{category.id}}">{{category.name}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span>所属性别</span></td>
+                                <td>
+                                    <select required="required" class="form-control" name="gender">
+                                        <option value="" selected="selected">选择所属性别</option>
+                                        {% for item in data["gender"] %}
+                                        <option value="{{item.id}}">{{item.name}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span>颜色</span></td>
+                                <td><input type="text" class="form-control" required="required" placeholder="颜色（必填）" name="color" /></td>
+                            </tr>
+                            <tr>
+                                <td><span>主材质</span></td>
+                                <td>
+                                    <select required="required" class="form-control" name="main_material">
+                                        <option value="" selected="selected">选择主材质</option>
+                                        {% for item in data["material"] %}
+                                        <option value="{{item.id}}">{{item.name}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span>副材质</span></td>
+                                <td>
+                                    <select required="required" class="form-control" name="vice_material">
+                                        <option value="" selected="selected">选择副材质</option>
+                                        {% for item in data["material"] %}
+                                        <option value="{{item.id}}">{{item.name}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span>内衬</span></td>
+                                <td>
+                                    <select class="form-control" name="interior_material">
+                                        <option value="" selected="selected">选择内衬</option>
+                                        {% for item in data["material"] %}
+                                        <option value="{{item.id}}">{{item.name}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span>外部结构</span></td>
+                                <td><input type="text" class="form-control" placeholder="外部结构" name="exterior_structure" /></td>
+                            </tr>
+                            <tr>
+                                <td><span>内部结构</span></td>
+                                <td><input type="text" class="form-control" placeholder="内部结构" name="interior_structure" /></td>
+                            </tr>
+                            <tr>
+                                <td><span>打开方式</span></td>
+                                <td><input type="text" class="form-control" placeholder="打开方式" name="open_mode" /></td>
+                            </tr>
+                            <tr>
+                                <td><span>长cm</span></td>
+                                <td><input type="text" class="form-control" placeholder="长cm" name="length" /></td>
+                            </tr>
+                            <tr>
+                                <td><span>宽cm</span></td>
+                                <td><input type="text" class="form-control" placeholder="宽cm" name="width" /></td>
+                            </tr>
+                            <tr>
+                                <td><span>厚cm</span></td>
+                                <td><input type="text" class="form-control" placeholder="厚cm" name="height" /></td>
+                            </tr>
+                            <tr>
+                                <td><span>重量g</span></td>
+                                <td><input type="text" class="form-control" placeholder="重量g" name="weight" /></td>
+                            </tr>
+                            <tr>
+                                <td><span>供应商</span></td>
+                                <td>
+                                    <select required="required" class="form-control" name="supplier">
+                                        <option value="" selected="selected">选择供应商</option>
+                                        {% for item in data["supplier"] %}
+                                        <option value="{{item.id}}">{{item.name}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span>出厂价</span></td>
+                                <td><input type="text" class="form-control" placeholder="出厂价" name="factory_price" /></td>
+                            </tr>
+                            <tr>
+                                <td><span>成本价</span></td>
+                                <td><input type="text" class="form-control" placeholder="成本价" name="cost_price" /></td>
+                            </tr>
+                            <tr>
+                                <td><span>吊牌价</span></td>
+                                <td><input type="text" class="form-control" placeholder="吊牌价" name="tag_price" /></td>
+                            </tr>
+                            <tr>
+                                <td><span>零售价</span></td>
+                                <td><input type="text" class="form-control" placeholder="零售价" name="retail_price" /></td>
+                            </tr>
+                            <tr>
+                                <td><span>原货号</span></td>
+                                <td><input type="text" class="form-control" placeholder="原货号" name="original_item_no" /></td>
+                            </tr>
+                        <tbody>
+                    </table>
+                </div>
+                <div class="col-md-12 col-lg-12 "> 
+                    <button id="new-prod" type="submit" class="btn btn-primary" style="margin: 0px auto;display: table;">添加银包</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="panel-footer">
+       <!--
+        <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary">
+            <i class="glyphicon glyphicon-envelope"></i>
+        </a>
+        <span class="pull-right">
+            <a href="edit.html" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning">
+                <i class="glyphicon glyphicon-edit"></i>
+            </a>
+            <a data-original-title="Remove this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger">
+                <i class="glyphicon glyphicon-remove"></i>
+            </a>
+        </span>
+       -->
+
+        <div class="btn-group" role="group" aria-label="...">
+            <a class="btn btn-success" href="{{ url_for('product.index') }}">产品列表</a>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+    {{ super() }}
+    <script src="{{url_for('static', filename='js/fileinput/plugins/piexif.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/fileinput/plugins/sortable.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/fileinput/plugins/purify.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/fileinput/fileinput.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/fileinput/locales/zh.js')}}"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.combobox').combobox();
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).on('ready', function() {
+            $("#input-pd").fileinput({
+                //uploadUrl: '/site/file-upload-single'
+                //frameClass: "no-frame",
+                browseClass: "btn btn-primary btn-block",
+                language: "zh",
+                required: true,
+                uploadAsync: false,
+                dropZoneEnabled: false,
+                initialPreview: [
+                    "{{url_for('static', filename='wallet/'+data["image"])}}"
+                ],
+                initialPreviewAsData: true, // identify if you are sending preview data only and not the raw markup
+                initialPreviewFileType: 'image', 
+                initialPreviewShowDelete: false,
+                initialPreviewConfig: [
+                    {
+                        caption: "{{data["image"]}}",
+                        size: 827000,
+                        width: "180px",
+                        //url: "/file-upload-batch/2",
+                        //key: 1,
+                        //extra: {id: 1}
+                    }
+                ],
+                overwriteInitial: true,
+                showPreview: true,
+                showClose: false,
+                showUpload: false,
+                showRemove: false,
+                showCaption: false,
+                //elErrorContainer: '#kartik-file-errors',
+                allowedFileExtensions: ["jpg", "jpeg", "png", "gif"]
+            });
+        });
+//        $("#new-prod").on("click", function() {
+//            $("#input-pd").fileinput('upload');
+//        });
+    </script>
+{%- endblock scripts %}

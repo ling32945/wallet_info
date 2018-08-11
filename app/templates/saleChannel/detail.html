@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+<div class="page-header">
+    <h1>销售渠道 -  详情</h1>
+</div>
+<div class="panel panel-primary">
+    <div class="panel-heading">销售渠道详情</div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-2">销售渠道：</div>
+            <div class="col-md-4">{{ data.name }}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">描述：</div>
+            <div class="col-md-4">{{ data.description }}</div>
+        </div>
+    </div>
+    <div class="panel-footer">
+        <div class="btn-group" role="group" aria-label="...">
+            <a class="btn btn-success" href="{{ url_for('saleChannel.index') }}">销售渠道列表</a>
+            <a class="btn btn-success" href="{{ url_for('saleChannel.add') }}">添加销售渠道</a>
+            <a class="btn btn-success" href="{{ url_for('saleChannel.update', token=data.id) }}">修改销售渠道</a>
+            <a class="btn btn-success" href="{{ url_for('saleChannel.delete', token=data.id) }}">删除销售渠道</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+<div class="page-header">
+    <h1>性别 -  修改</h1>
+</div>
+<div class="panel panel-primary">
+    <div class="panel-heading">修改性别</div>
+    <div class="panel-body">
+        <form classaction="{{ url_for('gender.update', token=data.id) }}" method="post">
+            <span class="input-group-addon">性别</span>
+            <input type="text" class="form-control" placeholder="性别（必填）" name="gender_name"  value="{{ data.sex }}"/>
+            <input type="text" class="form-control" placeholder="描述" name="gender_des"  value="{{ data.description }}"/>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+    </div>
+    <div class="panel-footer">
+        <div class="btn-group" role="group" aria-label="...">
+            <a class="btn btn-success" href="{{ url_for('gender.index') }}">性别列表</a>
+            <a class="btn btn-success" href="{{ url_for('gender.detail', token=data.id) }}">性别详情</a>
+            <a class="btn btn-success" href="{{ url_for('gender.update', token=data.id) }}">删除性别</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

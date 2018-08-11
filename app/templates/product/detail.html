@@ -1,0 +1,217 @@
+{% extends "base.html" %}
+{% block styles %}
+{{ super() }}
+<link rel="stylesheet" href="{{url_for('static', filename='css/fileinput/fileinput.css')}}">
+{% endblock styles %}
+
+{% block app_content %}
+<div class="page-header">
+    <h1>产品 -  详情</h1>
+</div>
+<div class="panel panel-primary">
+    <div class="panel-heading">银包详情</div>
+    <div class="panel-body">
+        <div class="row">
+                <div class="col-md-4 col-lg-4 " align="center">
+                    <div class="file-loading">
+                        <input id="input-pd" name="input-pd"  type="file">
+                    </div>
+                </div>
+                <div class=" col-md-8 col-lg-8 "> 
+                    <table class="table table-user-information">
+                        <tbody>
+                            <tr>
+                                <td><span>款号</span></td>
+                                <td>{{data.style_no}}</td>
+                            </tr>
+                            <tr>
+                                <td><span>货号</span></td>
+                                <td>{{data.item_no}}</td>
+                            </tr>
+                            <tr>
+                                <td><span>条形码</span></td>
+                                <td>{{data.barcode}}</td>
+                            </tr>
+                            <tr>
+                                <td><span>品牌</span></td>
+                                <td>{{data.brand}}</td>
+                            </tr>
+                            <tr>
+                                <td><span>产品简称</span></td>
+                                <td>{{data.product_abbreviation}}</td>
+                            </tr>
+                            <tr>
+                                <td><span>产品类别</span></td>
+                                <td>{{data.category}}</td>
+                            </tr>
+                            <tr>
+                                <td><span>所属性别</span></td>
+                                <td>{{data.gender}}</td>
+                            </tr>
+                            <tr>
+                                <td><span>颜色</span></td>
+                                <td>{{data.color}}</td>
+                            </tr>
+                            <tr>
+                                <td><span>主材质</span></td>
+                                <td>
+                                    {{data.main_material}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span>副材质</span></td>
+                                <td>
+                                    {{data.vice_material}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span>内衬</span></td>
+                                <td>
+                                    {{data.interior_material}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span>外部结构</span></td>
+                                <td>{{data.exterior_structure}}</td>
+                            </tr>
+                            <tr>
+                                <td><span>内部结构</span></td>
+                                <td>{{data.interior_structure}}</td>
+                            </tr>
+                            <tr>
+                                <td><span>打开方式</span></td>
+                                <td>{{data.open_mode}}</td>
+                            </tr>
+                            <tr>
+                                <td><span>长cm</span></td>
+                                <td>{{data.length}}</td>
+                            </tr>
+                            <tr>
+                                <td><span>宽cm</span></td>
+                                <td>{{data.width}}</td>
+                            </tr>
+                            <tr>
+                                <td><span>厚cm</span></td>
+                                <td>{{data.height}}</td>
+                            </tr>
+                            <tr>
+                                <td><span>长*宽*厚cm</span></td>
+                                <td>{{data.length}}*{{data.width}}*{{data.height}}</td>
+                            </tr>
+                            <tr>
+                                <td><span>重量g</span></td>
+                                <td>{{data.weight}}</td>
+                            </tr>
+                            <tr>
+                                <td><span>供应商</span></td>
+                                <td>
+                                    {{data.supplier}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span>出厂价</span></td>
+                                <td>{{data.factory_price}}</td>
+                            </tr>
+                            <tr>
+                                <td><span>成本价</span></td>
+                                <td>{{data.cost_price}}</td>
+                            </tr>
+                            <tr>
+                                <td><span>吊牌价</span></td>
+                                <td>{{data.tag_price}}</td>
+                            </tr>
+                            <tr>
+                                <td><span>零售价</span></td>
+                                <td>{{data.retail_price}}</td>
+                            </tr>
+                            <tr>
+                                <td><span>原货号</span></td>
+                                <td>{{data.original_item_no}}</td>
+                            </tr>
+                        <tbody>
+                    </table>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="panel-footer">
+       <!--
+        <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary">
+            <i class="glyphicon glyphicon-envelope"></i>
+        </a>
+        <span class="pull-right">
+            <a href="edit.html" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning">
+                <i class="glyphicon glyphicon-edit"></i>
+            </a>
+            <a data-original-title="Remove this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger">
+                <i class="glyphicon glyphicon-remove"></i>
+            </a>
+        </span>
+       -->
+
+        <div class="btn-group" role="group" aria-label="...">
+            <a class="btn btn-success" href="{{ url_for('product.index') }}">银包列表</a>
+            <a class="btn btn-success" href="{{ url_for('product.add') }}">添加银包</a>
+            <a class="btn btn-success" href="{#{ url_for('product.update', token=data.id) }#}">修改银包</a>
+            <a class="btn btn-success" href="{#{ url_for('product.delete', token=data.id) }#}">删除银包</a>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+    {{ super() }}
+    <script src="{{url_for('static', filename='js/fileinput/plugins/piexif.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/fileinput/plugins/sortable.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/fileinput/plugins/purify.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/fileinput/fileinput.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/fileinput/locales/zh.js')}}"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.combobox').combobox();
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).on('ready', function() {
+            $("#input-pd").fileinput({
+                //uploadUrl: '/site/file-upload-single'
+                //frameClass: "no-frame",
+                browseClass: "btn btn-primary btn-block",
+                language: "zh",
+                required: true,
+                uploadAsync: false,
+                dropZoneEnabled: false,
+                initialPreview: [
+                    "{{url_for('static', filename='wallet/'+data["image"])}}"
+                ],
+                initialPreviewAsData: true, // identify if you are sending preview data only and not the raw markup
+                initialPreviewFileType: 'image', 
+                initialPreviewShowDelete: false,
+                initialPreviewConfig: [
+                    {
+                        caption: "{{data["image"]}}",
+                        size: 827000,
+                        width: "180px",
+                        //url: "/file-upload-batch/2",
+                        //key: 1,
+                        //extra: {id: 1}
+                    }
+                ],
+                overwriteInitial: true,
+                showPreview: true,
+                showBrowse: false,
+                showClose: false,
+                showUpload: false,
+                showRemove: false,
+                showCaption: false,
+                //elErrorContainer: '#kartik-file-errors',
+                allowedFileExtensions: ["jpg", "jpeg", "png", "gif"]
+            });
+        });
+//        $("#new-prod").on("click", function() {
+//            $("#input-pd").fileinput('upload');
+//        });
+    </script>
+{%- endblock scripts %}

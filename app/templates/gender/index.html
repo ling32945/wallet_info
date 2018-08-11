@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+<div class="page-header">
+    <h1>性别 -  列表</h1>
+</div>
+<div class="panel panel-primary">
+    <div class="panel-heading">性别列表</div>
+    <div class="panel-body">
+        <p>性别列表列出了所有银包的所属性别</p>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>性别</th>
+                <th>描述</th>
+                <th width=180px;></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for gender in data %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ gender.sex }}</td>
+                <td>{{ gender.description }}</td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="...">
+                        <a class="btn btn-default" href="{{ url_for('gender.detail', token=gender.id) }}">查看</a>
+                        <a class="btn btn-default" href="{{ url_for('gender.update', token=gender.id) }}">修改</a>
+                        <a class="btn btn-default" href="{{ url_for('gender.delete', token=gender.id) }}">删除</a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="panel-footer">
+        <div class="btn-group" role="group" aria-label="...">
+            <a class="btn btn-success" href="{{ url_for('gender.add') }}">添加性别</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

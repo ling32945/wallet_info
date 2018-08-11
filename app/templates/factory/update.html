@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+<div class="page-header">
+    <h1>工厂 -  修改</h1>
+</div>
+<div class="panel panel-primary">
+    <div class="panel-heading">修改工厂</div>
+    <div class="panel-body">
+        <form classaction="{{ url_for('factory.update', token=data.id) }}" method="post">
+            <span class="input-group-addon">工厂</span>
+            <input type="text" class="form-control" placeholder="工厂编号（必填）" name="no"  value="{{ data.no }}"/>
+            <input type="text" class="form-control" placeholder="工厂名称（必填）" name="name"  value="{{ data.name }}"/>
+            <input type="text" class="form-control" placeholder="描述" name="factory_des"  value="{{ data.description }}"/>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+    </div>
+    <div class="panel-footer">
+        <div class="btn-group" role="group" aria-label="...">
+            <a class="btn btn-success" href="{{ url_for('factory.index') }}">工厂列表</a>
+            <a class="btn btn-success" href="{{ url_for('factory.detail', token=data.id) }}">工厂详情</a>
+            <a class="btn btn-success" href="{{ url_for('factory.update', token=data.id) }}">删除工厂</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
